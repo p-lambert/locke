@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Arduino.h"
+#define NOBODY_YET '-'
 
 namespace locke {
   enum State {

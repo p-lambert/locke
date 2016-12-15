@@ -3,13 +3,7 @@
 #include "Arduino.h"
 #include "_Server.h"
 
-#define NOBODY_YET '\0'
-
-#define SERVER_CFG_FILE "server_config"
-
-#define INIT_CFG_TERM 0
-#define INIT_CFG_TAIL 0
-#define INIT_CFG_VOTE NOBODY_YET
+#define SERVER_CFG_FILE "svr_cfg"
 
 namespace locke {
   class Server;

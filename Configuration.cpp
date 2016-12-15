@@ -12,13 +12,15 @@ Configuration::Configuration(Server& server, Log& log) :
 void Configuration::save()
 {
   _ConfigurationRecord config{_server.current_term, _server.voted_for, _log._tail};
-  Database::set(&config, SERVER_CFG_FILE, 0, sizeof(_ConfigurationRecord));
+  Database::set(&config, SERVER_CFG_FILE, 0, sizeof(config));
 }
 
 void Configuration::restore()
 {
-  _ConfigurationRecord config{INIT_CFG_TERM, INIT_CFG_VOTE, INIT_CFG_TAIL};
-  Database::get(&config, SERVER_CFG_FILE, 0, sizeof(_ConfigurationRecord));
+  _ConfigurationRecord config;
+  int result = Database::get(&config, SERVER_CFG_FILE, 0, sizeof(config));
+
+  if (result < 1) return;
 
   _server.current_term = config.current_term;
   _server.voted_for = config.voted_for;

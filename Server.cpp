@@ -3,7 +3,9 @@
 
 using namespace locke;
 
-locke::Server::Server(Log* log) : _log(log) {}
+locke::Server::Server(Log* log) :
+    _log(log),
+    voted_for(NOBODY_YET) {}
 
 void locke::Server::set_status(State status)
 {
