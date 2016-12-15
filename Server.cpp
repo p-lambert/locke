@@ -1,25 +1,29 @@
 #include "_Server.h"
+#include "Configuration.h"
 
 using namespace locke;
 
-locke::Server::Server(IPAddress* ip, char name) : ip(ip), _name(name) {}
+locke::Server::Server(Log* log) : _log(log) {}
 
 void locke::Server::set_status(State status)
 {
   _status = status;
 }
 
-void locke::Server::load_state()
+void locke::Server::setup()
 {
-  PersistentState::get(*this, &current_term, &voted_for);
+  restore();
+  set_status(Follower);
 }
 
-void locke::Server::save_state()
+void locke::Server::save()
 {
-  PersistentState::set(*this, current_term, voted_for);
+  Configuration config(*this, *_log);
+  config.save();
 }
 
-char locke::Server::get_name() const
+void locke::Server::restore()
 {
-  return _name;
+  Configuration config(*this, *_log);
+  config.restore();
 }

@@ -1,7 +1,6 @@
 #pragma once
 
-#include "IPAddress.h"
-#include "PersistentState.h"
+#include "Arduino.h"
 
 namespace locke {
   enum State {
@@ -11,20 +10,23 @@ namespace locke {
     Leader
   };
 
+  class Log;
+  class Configuration;
+
   class Server {
  public:
-    Server(IPAddress*, char);
-    void load_state();
-    void save_state();
+    Server(Log*);
     void set_status(State);
-    char get_name() const;
-    unsigned long current_term;
+    void setup();
+    void save();
+    void restore();
+    uint32_t current_term;
     char voted_for;
-    char leader;
  private:
-    const char _name;
-    const IPAddress* ip;
     State _status;
+    Log* _log;
+
+    friend Configuration;
   };
 
 }
