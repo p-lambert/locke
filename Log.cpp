@@ -1,16 +1,12 @@
 #include "Log.h"
-#include "SD.h"
+#include "Database.h"
 
 using namespace locke;
 
 void Log::append(LogEntry* entry)
 {
-  File f = SD.open(LOG_FILE_NAME, O_WRITE | O_CREAT);
   uint32_t entry_pos = _update_tail();
-
-  f.seek(entry_pos);
-  f.write((const uint8_t *)entry, sizeof(LogEntry));
-  f.close();
+  Database::set(entry, LOG_FILE_NAME, entry_pos, sizeof(LogEntry));
 }
 
 bool Log::fetch(LogEntry* entry, uint32_t _idx)
@@ -22,10 +18,7 @@ bool Log::fetch(LogEntry* entry, uint32_t _idx)
     return false;
   }
 
-  File f = SD.open(LOG_FILE_NAME, O_READ);
-  f.seek(entry_pos);
-  f.read(entry, sizeof(LogEntry));
-  f.close();
+  Database::get(entry, LOG_FILE_NAME, entry_pos, sizeof(LogEntry));
 
   return true;
 }
