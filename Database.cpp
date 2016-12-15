@@ -3,18 +3,22 @@
 
 using namespace locke;
 
-void Database::get(void *result, char* file_name, uint32_t pos, int size)
+int Database::get(void *record, char* file_name, uint32_t pos, int size)
 {
   File f = SD.open(file_name, O_READ);
   f.seek(pos);
-  f.read(result, size);
+  int result = f.read(record, size);
   f.close();
+
+  return result;
 }
 
-void Database::set(void *value, char* file_name, uint32_t pos, int size)
+int Database::set(void *record, char* file_name, uint32_t pos, int size)
 {
   File f = SD.open(file_name, O_WRITE | O_CREAT);
   f.seek(pos);
-  f.write((const uint8_t *)value, size);
+  int result = f.write((const uint8_t *)record, size);
   f.close();
+
+  return result;
 }
