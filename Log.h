@@ -19,6 +19,7 @@ namespace locke {
     void append(LogEntry*);
     bool fetch(LogEntry*, uint32_t);
     void prepare(LogEntry*, uint32_t, uint32_t, char*);
+    bool isEmpty();
     uint32_t _tail;
  private:
     uint32_t _update_tail();

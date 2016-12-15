@@ -40,3 +40,5 @@ uint32_t Log::_update_tail()
 
   return previous;
 }
+
+bool Log::isEmpty() { return _tail == 0; }
