@@ -1,52 +1,52 @@
+#include "Constants.hpp"
 #include "AppendEntry.hpp"
-#include "Server.hpp"
 
 using namespace locke;
 
 template <size_t N>
-AppendEntry<N>::AppendEntry(StaticJsonBuffer<N>& json, const char* msg)
-{
-  _json = json.parseObject(msg);
-}
+AppendEntry<N>::AppendEntry(StaticJsonBuffer<N>& json, const char* msg) :
+    _json(json.parseObject(msg)) {}
 
 template <size_t N>
 AppendEntry<N>::AppendEntry
-(StaticJsonBuffer<N>& json, const Server& server, const LogEntry& entry)
+(StaticJsonBuffer<N>& json,
+ const Server& server,
+ const LogEntry& entry,
+ const LogEntry& previous_entry) : _json(json.createObject())
 {
-  _json = json.createObject();
-
   _json["term"] = server.current_term;
-  _json["leader"] = server.name;
-  _json["prev_index"] = entry.idx - 1;
+  _json["leader"] = (uint8_t)server.name;
+  _json["prev_index"] = previous_entry.idx;
+  _json["prev_term"] = previous_entry.term;
   _json["entry"] = entry.value;
 }
 
 template <size_t N>
-uint32_t AppendEntry<N>::term()
+uint32_t AppendEntry<N>::term() const
 {
   return _json["term"];
 }
 
 template <size_t N>
-char AppendEntry<N>::leader()
+char AppendEntry<N>::leader() const
 {
-  return _json["leader"][0];
+  return (uint8_t)_json["leader"];
 }
 
 template <size_t N>
-uint32_t AppendEntry<N>::prev_index()
+uint32_t AppendEntry<N>::prev_index() const
 {
   return _json["prev_index"];
 }
 
 template <size_t N>
-uint32_t AppendEntry<N>::leader_commit()
+uint32_t AppendEntry<N>::prev_term() const
 {
-  return _json["leader_commit"];
+  return _json["prev_term"];
 }
 
 template <size_t N>
-const char* AppendEntry<N>::entry()
+const char* AppendEntry<N>::entry() const
 {
   return _json["entry"];
 }
@@ -56,3 +56,5 @@ void AppendEntry<N>::print()
 {
   _json.printTo(Serial);
 }
+
+template class AppendEntry<MAX_JSON_SIZE>;

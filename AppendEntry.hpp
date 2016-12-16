@@ -11,14 +11,19 @@ template <size_t N>
 class AppendEntry {
  public:
   AppendEntry(StaticJsonBuffer<N>&, const char*);
-  AppendEntry(StaticJsonBuffer<N>&, const Server&, const LogEntry&);
-  uint32_t term();
-  char leader();
-  uint32_t prev_index();
-  uint32_t leader_commit();
-  const char* entry();
-  void print();
 
+  AppendEntry(
+      StaticJsonBuffer<N>&,
+      const Server&,
+      const LogEntry&,
+      const LogEntry&);
+
+  uint32_t term() const;
+  char leader() const;
+  uint32_t prev_index() const;
+  uint32_t prev_term() const;
+  const char* entry() const;
+  void print();
  private:
   JsonObject& _json;
 };
