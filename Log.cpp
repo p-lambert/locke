@@ -10,15 +10,11 @@ void Log::append(LogEntry* entry)
   Database::set(entry, LOG_FILE_NAME, entry_pos, sizeof(LogEntry));
 }
 
-bool Log::fetch(LogEntry* entry, uint32_t _idx)
+bool Log::fetch(LogEntry* entry, uint32_t idx)
 {
-  uint32_t idx = _idx - 1;
-  uint32_t entry_pos = idx * sizeof(LogEntry);
+  if (!exists(idx)) return false;
 
-  if (entry_pos > _tail) {
-    return false;
-  }
-
+  uint32_t entry_pos = (idx - 1) * sizeof(LogEntry);
   Database::get(entry, LOG_FILE_NAME, entry_pos, sizeof(LogEntry));
 
   return true;
@@ -32,6 +28,12 @@ void Log::prepare(LogEntry* entry, uint32_t idx, uint32_t term, char* value)
   if (strlen(value) <= MAX_LOG_VALUE_SIZE) {
     strcpy((char *)&entry->value, value);
   }
+}
+
+bool Log::exists(uint32_t idx)
+{
+  return idx <= (_tail / sizeof(LogEntry));
+
 }
 
 uint32_t Log::_update_tail()
