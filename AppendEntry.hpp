@@ -23,6 +23,7 @@ class AppendEntry {
   uint32_t prev_index() const;
   uint32_t prev_term() const;
   const char* entry() const;
+  bool isHeartbeat() const;
   void print();
  private:
   JsonObject& _json;

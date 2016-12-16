@@ -52,6 +52,12 @@ const char* AppendEntry<N>::entry() const
 }
 
 template <size_t N>
+bool AppendEntry<N>::isHeartbeat() const
+{
+  return !_json.containsKey("entry") || strlen(_json["entry"]) == 0;
+}
+
+template <size_t N>
 void AppendEntry<N>::print()
 {
   _json.printTo(Serial);
