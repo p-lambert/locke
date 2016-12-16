@@ -16,13 +16,14 @@ namespace locke {
 
   class Server {
  public:
-    Server(Log*);
+    Server(Log*, char);
     void set_status(State);
     void setup();
     void save();
     void restore();
     uint32_t current_term;
     char voted_for;
+    const char name;
  private:
     State _status;
     Log* _log;
