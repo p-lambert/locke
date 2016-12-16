@@ -23,6 +23,7 @@ class Server {
   void restore();
   uint32_t current_term;
   char voted_for;
+  char leader;
   const char name;
  private:
   State _status;
