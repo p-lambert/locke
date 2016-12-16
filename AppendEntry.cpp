@@ -3,13 +3,11 @@
 
 using namespace locke;
 
-template <size_t N>
-AppendEntry<N>::AppendEntry(StaticJsonBuffer<N>& json, const char* msg) :
+AppendEntry::AppendEntry(StaticJsonBuffer<MAX_JSON_SIZE>& json, const char* msg) :
     _json(json.parseObject(msg)) {}
 
-template <size_t N>
-AppendEntry<N>::AppendEntry
-(StaticJsonBuffer<N>& json,
+AppendEntry::AppendEntry
+(StaticJsonBuffer<MAX_JSON_SIZE>& json,
  const Server& server,
  const LogEntry& entry,
  const LogEntry& previous_entry) : _json(json.createObject())
@@ -21,46 +19,37 @@ AppendEntry<N>::AppendEntry
   _json["entry"] = entry.value;
 }
 
-template <size_t N>
-uint32_t AppendEntry<N>::term() const
+uint32_t AppendEntry::term() const
 {
   return _json["term"];
 }
 
-template <size_t N>
-char AppendEntry<N>::leader() const
+char AppendEntry::leader() const
 {
   return (uint8_t)_json["leader"];
 }
 
-template <size_t N>
-uint32_t AppendEntry<N>::prev_index() const
+uint32_t AppendEntry::prev_index() const
 {
   return _json["prev_index"];
 }
 
-template <size_t N>
-uint32_t AppendEntry<N>::prev_term() const
+uint32_t AppendEntry::prev_term() const
 {
   return _json["prev_term"];
 }
 
-template <size_t N>
-const char* AppendEntry<N>::entry() const
+const char* AppendEntry::entry() const
 {
   return _json["entry"];
 }
 
-template <size_t N>
-bool AppendEntry<N>::isHeartbeat() const
+bool AppendEntry::isHeartbeat() const
 {
   return !_json.containsKey("entry") || strlen(_json["entry"]) == 0;
 }
 
-template <size_t N>
-void AppendEntry<N>::print()
+void AppendEntry::print()
 {
   _json.printTo(Serial);
 }
-
-template class AppendEntry<MAX_JSON_SIZE>;

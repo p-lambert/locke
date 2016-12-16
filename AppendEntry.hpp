@@ -7,13 +7,12 @@
 
 namespace locke {
 
-template <size_t N>
 class AppendEntry {
  public:
-  AppendEntry(StaticJsonBuffer<N>&, const char*);
+  AppendEntry(StaticJsonBuffer<MAX_JSON_SIZE>&, const char*);
 
   AppendEntry(
-      StaticJsonBuffer<N>&,
+      StaticJsonBuffer<MAX_JSON_SIZE>&,
       const Server&,
       const LogEntry&,
       const LogEntry&);
