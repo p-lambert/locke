@@ -1,5 +1,6 @@
-#include "Log.h"
-#include "Database.h"
+#include "Constants.hpp"
+#include "Log.hpp"
+#include "Database.hpp"
 
 using namespace locke;
 

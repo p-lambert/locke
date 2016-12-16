@@ -1,5 +1,5 @@
-#include "AppendEntry.h"
-#include "_Server.h"
+#include "AppendEntry.hpp"
+#include "Server.hpp"
 
 using namespace locke;
 
@@ -11,12 +11,12 @@ AppendEntry<N>::AppendEntry(StaticJsonBuffer<N>& json, const char* msg)
 
 template <size_t N>
 AppendEntry<N>::AppendEntry
-(StaticJsonBuffer<N>& json, Server& svr, LogEntry& entry)
+(StaticJsonBuffer<N>& json, const Server& server, const LogEntry& entry)
 {
   _json = json.createObject();
 
-  _json["term"] = svr.current_term;
-  _json["leader"] = svr.name;
+  _json["term"] = server.current_term;
+  _json["leader"] = server.name;
   _json["prev_index"] = entry.idx - 1;
   _json["entry"] = entry.value;
 }

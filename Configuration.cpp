@@ -1,7 +1,8 @@
-#include "_Server.h"
-#include "Configuration.h"
-#include "Database.h"
-#include "Log.h"
+#include "Constants.hpp"
+#include "Server.hpp"
+#include "Configuration.hpp"
+#include "Database.hpp"
+#include "Log.hpp"
 
 using namespace locke;
 
@@ -11,18 +12,18 @@ Configuration::Configuration(Server& server, Log& log) :
 
 void Configuration::save()
 {
-  _ConfigurationRecord config{_server.current_term, _server.voted_for, _log._tail};
-  Database::set(&config, SERVER_CFG_FILE, 0, sizeof(config));
+  _ConfigurationRecord cfg{_server.current_term, _server.voted_for, _log._tail};
+  Database::set(&cfg, CFG_FILE_NAME, 0, sizeof(cfg));
 }
 
 void Configuration::restore()
 {
-  _ConfigurationRecord config;
-  int result = Database::get(&config, SERVER_CFG_FILE, 0, sizeof(config));
+  _ConfigurationRecord cfg;
+  int result = Database::get(&cfg, CFG_FILE_NAME, 0, sizeof(cfg));
 
   if (result < 1) return;
 
-  _server.current_term = config.current_term;
-  _server.voted_for = config.voted_for;
-  _log._tail = config.log_tail;
+  _server.current_term = cfg.current_term;
+  _server.voted_for = cfg.voted_for;
+  _log._tail = cfg.log_tail;
 }
