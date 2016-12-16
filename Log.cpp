@@ -20,7 +20,8 @@ bool Log::fetch(LogEntry* entry, uint32_t idx)
   return true;
 }
 
-void Log::prepare(LogEntry* entry, uint32_t idx, uint32_t term, char* value)
+void Log::prepare
+(LogEntry* entry, uint32_t idx, uint32_t term, const char* value)
 {
   entry->idx = idx;
   entry->term = term;
@@ -30,10 +31,21 @@ void Log::prepare(LogEntry* entry, uint32_t idx, uint32_t term, char* value)
   }
 }
 
-bool Log::exists(uint32_t idx)
+bool Log::exists(uint32_t idx) const
 {
   return idx <= (_tail / sizeof(LogEntry));
+}
 
+void Log::truncate(uint32_t idx)
+{
+  if (!exists(idx)) return;
+
+  _tail = (idx - 1) * sizeof(LogEntry);
+}
+
+bool Log::is_empty() const
+{
+  return _tail == 0;
 }
 
 uint32_t Log::_update_tail()
@@ -43,5 +55,3 @@ uint32_t Log::_update_tail()
 
   return previous;
 }
-
-bool Log::isEmpty() { return _tail == 0; }

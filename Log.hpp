@@ -17,9 +17,10 @@ class Log {
  public:
   void append(LogEntry*);
   bool fetch(LogEntry*, uint32_t);
-  void prepare(LogEntry*, uint32_t, uint32_t, char*);
-  bool isEmpty();
-  bool exists(uint32_t);
+  void prepare(LogEntry*, uint32_t, uint32_t, const char*);
+  bool is_empty() const;
+  bool exists(uint32_t) const;
+  void truncate(uint32_t);
   uint32_t _tail;
  private:
   uint32_t _update_tail();
