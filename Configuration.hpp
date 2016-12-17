@@ -1,11 +1,11 @@
 #pragma once
 
 #include "Arduino.h"
-#include "Server.hpp"
+#include "RaftServer.hpp"
 
 namespace locke {
 
-class Server;
+class RaftServer;
 
 typedef struct {
   uint32_t current_term;
@@ -15,11 +15,11 @@ typedef struct {
 
 class Configuration {
  public:
-  Configuration(Server&, Log&);
+  Configuration(RaftServer&, Log&);
   void restore();
   void save();
  private:
-  Server& _server;
+  RaftServer& _server;
   Log& _log;
 };
 

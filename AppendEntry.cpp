@@ -8,7 +8,7 @@ AppendEntry::AppendEntry(StaticJsonBuffer<MAX_JSON_SIZE>& json, const char* msg)
 
 AppendEntry::AppendEntry
 (StaticJsonBuffer<MAX_JSON_SIZE>& json,
- const Server& server,
+ const RaftServer& server,
  const LogEntry& entry,
  const LogEntry& previous_entry) : _json(json.createObject())
 {

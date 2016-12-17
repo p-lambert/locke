@@ -1,32 +1,32 @@
 #include "Constants.hpp"
-#include "Server.hpp"
+#include "RaftServer.hpp"
 #include "Configuration.hpp"
 
 using namespace locke;
 
-locke::Server::Server(Log* log, char name) :
+RaftServer::RaftServer(Log* log, char name) :
     _log(log),
     name(name),
     voted_for(NOBODY_YET) {}
 
-void locke::Server::set_status(State status)
+void RaftServer::set_status(State status)
 {
   _status = status;
 }
 
-void locke::Server::setup()
+void RaftServer::setup()
 {
   restore();
   set_status(Follower);
 }
 
-void locke::Server::save()
+void RaftServer::save()
 {
   Configuration config(*this, *_log);
   config.save();
 }
 
-void locke::Server::restore()
+void RaftServer::restore()
 {
   Configuration config(*this, *_log);
   config.restore();

@@ -4,7 +4,7 @@
 using namespace locke;
 
 AppendEntryHandler::AppendEntryHandler
-(Server& server,
+(RaftServer& server,
  Log& log,
  StaticJsonBuffer<MAX_JSON_SIZE>& buff,
  const AppendEntry& req) :

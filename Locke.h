@@ -1,5 +1,5 @@
 #include "Constants.hpp"
-#include "Server.hpp"
+#include "RaftServer.hpp"
 #include "Log.hpp"
 #include "Configuration.hpp"
 #include "AppendEntry.hpp"

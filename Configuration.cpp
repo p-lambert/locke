@@ -1,12 +1,12 @@
 #include "Constants.hpp"
-#include "Server.hpp"
+#include "RaftServer.hpp"
 #include "Configuration.hpp"
 #include "Database.hpp"
 #include "Log.hpp"
 
 using namespace locke;
 
-Configuration::Configuration(Server& server, Log& log) :
+Configuration::Configuration(RaftServer& server, Log& log) :
     _server(server),
     _log(log) {}
 

@@ -3,7 +3,7 @@
 #include "Arduino.h"
 #include "ArduinoJson.h"
 #include "Log.hpp"
-#include "Server.hpp"
+#include "RaftServer.hpp"
 
 namespace locke {
 
@@ -13,7 +13,7 @@ class AppendEntry {
 
   AppendEntry(
       StaticJsonBuffer<MAX_JSON_SIZE>&,
-      const Server&,
+      const RaftServer&,
       const LogEntry&,
       const LogEntry&);
 

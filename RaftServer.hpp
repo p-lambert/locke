@@ -14,9 +14,9 @@ enum State {
 class Log;
 class Configuration;
 
-class Server {
+class RaftServer {
  public:
-  Server(Log*, char);
+  RaftServer(Log*, char);
   void set_status(State);
   void setup();
   void save();
