@@ -14,8 +14,8 @@ class AppendEntry {
   AppendEntry(
       StaticJsonBuffer<MAX_JSON_SIZE>&,
       const RaftServer&,
-      const LogEntry&,
-      const LogEntry&);
+      const Log::Entry&,
+      const Log::Entry&);
 
   uint32_t term() const;
   char leader() const;

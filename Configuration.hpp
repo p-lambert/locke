@@ -15,12 +15,11 @@ typedef struct {
 
 class Configuration {
  public:
-  Configuration(RaftServer&, Log&);
+  Configuration(RaftServer&);
   void restore();
   void save();
  private:
   RaftServer& _server;
-  Log& _log;
 };
 
 }

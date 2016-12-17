@@ -9,8 +9,8 @@ AppendEntry::AppendEntry(StaticJsonBuffer<MAX_JSON_SIZE>& json, const char* msg)
 AppendEntry::AppendEntry
 (StaticJsonBuffer<MAX_JSON_SIZE>& json,
  const RaftServer& server,
- const LogEntry& entry,
- const LogEntry& previous_entry) : _json(json.createObject())
+ const Log::Entry& entry,
+ const Log::Entry& previous_entry) : _json(json.createObject())
 {
   _json[AE_TERM] = server.current_term;
   _json[AE_LEADER] = (uint8_t)server.name;
