@@ -4,25 +4,25 @@
 using namespace locke;
 
 AppendEntryResponse::AppendEntryResponse
-(StaticJsonBuffer<MAX_JSON_SIZE>& json, const char* msg)
+(StaticJsonBuffer<JSON_SMALL>& json, const char* msg)
     : _json(json.parseObject(msg)) {}
 
 AppendEntryResponse::AppendEntryResponse
-(StaticJsonBuffer<MAX_JSON_SIZE>& json, bool success, uint32_t term) :
+(StaticJsonBuffer<JSON_SMALL>& json, bool success, uint32_t term) :
     _json(json.createObject())
 {
-  _json["success"] = success;
-  _json["term"] =  term;
+  _json[AE_SUCCESS] = success;
+  _json[AE_TERM] =  term;
 }
 
 uint32_t AppendEntryResponse::term() const
 {
-  return _json["term"];
+  return _json[AE_TERM];
 }
 
 bool AppendEntryResponse::success() const
 {
-  return _json["success"];
+  return _json[AE_SUCCESS];
 }
 
 void AppendEntryResponse::print()

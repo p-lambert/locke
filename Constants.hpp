@@ -1,7 +1,9 @@
 #pragma once
 
-#define MAX_LOG_VALUE_SIZE 70
-#define MAX_JSON_SIZE 70
+#define MAX_LOG_VALUE_SIZE 20
+#define JSON_LARGE 70
+#define JSON_SMALL 25
+#define REQUEST_BUFFER 85
 #define LOG_FILE_NAME "log"
 #define CFG_FILE_NAME "svr"
 #define INITIAL_TERM 1
@@ -13,3 +15,4 @@
 #define AE_PREV_IDX "pi"
 #define AE_PREV_TERM "pt"
 #define AE_VALUE "v"
+#define AE_SUCCESS "v"

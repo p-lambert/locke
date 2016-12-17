@@ -9,10 +9,10 @@ namespace locke {
 
 class AppendEntry {
  public:
-  AppendEntry(StaticJsonBuffer<MAX_JSON_SIZE>&, const char*);
+  AppendEntry(StaticJsonBuffer<JSON_LARGE>&, char[REQUEST_BUFFER]);
 
   AppendEntry(
-      StaticJsonBuffer<MAX_JSON_SIZE>&,
+      StaticJsonBuffer<JSON_LARGE>&,
       const RaftServer&,
       const Log::Entry&,
       const Log::Entry&);

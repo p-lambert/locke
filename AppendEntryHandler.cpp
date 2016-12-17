@@ -4,12 +4,7 @@
 using namespace locke;
 
 AppendEntryHandler::AppendEntryHandler
-(RaftServer& server,
- StaticJsonBuffer<MAX_JSON_SIZE>& buff,
- const AppendEntry& req) :
-    server(server),
-    buff(buff),
-    req(req) {}
+(RaftServer& server, const AppendEntry& req) : server(server), req(req) {}
 
 void AppendEntryHandler::process()
 {
@@ -57,8 +52,8 @@ void AppendEntryHandler::try_append()
 void AppendEntryHandler::append()
 {
   uint32_t idx = req.prev_index() + 1;
-  Log::Entry new_entry;
 
+  Log::Entry new_entry;
   Log::truncate(idx);
   Log::prepare(&new_entry, idx, req.term(), req.entry());
   Log::append(&new_entry);
@@ -69,6 +64,7 @@ void AppendEntryHandler::append()
 
 void AppendEntryHandler::reply(bool success)
 {
+  StaticJsonBuffer<JSON_SMALL> buff;
   AppendEntryResponse response(buff, success, server.current_term);
   response.print();
 }

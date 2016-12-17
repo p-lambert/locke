@@ -3,11 +3,12 @@
 
 using namespace locke;
 
-AppendEntry::AppendEntry(StaticJsonBuffer<MAX_JSON_SIZE>& json, const char* msg) :
+AppendEntry::AppendEntry
+(StaticJsonBuffer<JSON_LARGE>& json, char msg[REQUEST_BUFFER]) :
     _json(json.parseObject(msg)) {}
 
 AppendEntry::AppendEntry
-(StaticJsonBuffer<MAX_JSON_SIZE>& json,
+(StaticJsonBuffer<JSON_LARGE>& json,
  const RaftServer& server,
  const Log::Entry& entry,
  const Log::Entry& previous_entry) : _json(json.createObject())
