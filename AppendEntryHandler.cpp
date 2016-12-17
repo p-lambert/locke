@@ -20,22 +20,21 @@ void AppendEntryHandler::process()
     return;
   }
 
+  update_server();
+
   if (req.isHeartbeat()) {
-    process_heartbeat();
+    reply(true);
     return;
   }
 
   try_append();
 }
 
-void AppendEntryHandler::process_heartbeat()
+void AppendEntryHandler::update_server()
 {
-  // Update timeout
   server.current_term = req.term();
   server.leader = req.leader();
   server.save();
-
-  reply(true);
 }
 
 void AppendEntryHandler::try_append()

@@ -48,6 +48,15 @@ bool Log::is_empty() const
   return _tail == 0;
 }
 
+void Log::setup()
+{
+  if (!is_empty()) return;
+
+  LogEntry sentinel_entry;
+  prepare(&sentinel_entry, 1, 1, "");
+  append(&sentinel_entry);
+}
+
 uint32_t Log::_update_tail()
 {
   uint32_t previous = _tail;

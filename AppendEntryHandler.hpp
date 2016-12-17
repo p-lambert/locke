@@ -16,7 +16,7 @@ class AppendEntryHandler {
 
   void process();
  private:
-  void process_heartbeat();
+  void update_server();
   void try_append();
   void append();
   void reply(bool);

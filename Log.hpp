@@ -21,6 +21,7 @@ class Log {
   bool is_empty() const;
   bool exists(uint32_t) const;
   void truncate(uint32_t);
+  void setup();
   uint32_t _tail;
  private:
   uint32_t _update_tail();

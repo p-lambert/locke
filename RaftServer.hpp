@@ -5,7 +5,6 @@
 namespace locke {
 
 enum State {
-  Unknown,
   Follower,
   Candidate,
   Leader
@@ -25,9 +24,9 @@ class RaftServer {
   char voted_for;
   char leader;
   const char name;
+  Log* _log;
  private:
   State _status;
-  Log* _log;
 
   friend Configuration;
 };
