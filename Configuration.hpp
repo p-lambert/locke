@@ -5,21 +5,17 @@
 
 namespace locke {
 
-class RaftServer;
+namespace Configuration {
 
 typedef struct {
   uint32_t current_term;
   char voted_for;
   uint32_t log_tail;
-} _ConfigurationRecord;
+} Record;
 
-class Configuration {
- public:
-  Configuration(RaftServer&);
-  void restore();
-  void save();
- private:
-  RaftServer& _server;
-};
+void restore(RaftServer&);
+void save(RaftServer&);
+
+}
 
 }

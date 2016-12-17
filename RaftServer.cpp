@@ -18,18 +18,16 @@ void RaftServer::set_status(State status)
 void RaftServer::setup()
 {
   restore();
-  Log::setup();
   set_status(Follower);
+  Log::setup();
 }
 
 void RaftServer::save()
 {
-  Configuration config(*this);
-  config.save();
+  Configuration::save(*this);
 }
 
 void RaftServer::restore()
 {
-  Configuration config(*this);
-  config.restore();
+  Configuration::restore(*this);
 }

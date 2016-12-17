@@ -10,8 +10,6 @@ enum State {
   Leader
 };
 
-class Configuration;
-
 class RaftServer {
  public:
   RaftServer(char);
@@ -25,8 +23,6 @@ class RaftServer {
   const char name;
  private:
   State _status;
-
-  friend Configuration;
 };
 
 }
