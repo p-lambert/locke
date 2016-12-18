@@ -5,6 +5,7 @@
 #include "AppendEntry.hpp"
 #include "AppendEntryResponse.hpp"
 #include "AppendEntryHandler.hpp"
+#include "RequestVote.hpp"
 #include "Database.hpp"
 
 using namespace locke;
