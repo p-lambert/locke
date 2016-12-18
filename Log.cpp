@@ -4,24 +4,25 @@
 
 using namespace locke;
 
-void Log::append(LogEntry* entry)
+uint32_t Log::tail = 0;
+
+void Log::append(Entry* entry)
 {
-  uint32_t entry_pos = _update_tail();
-  Database::set(entry, LOG_FILE_NAME, entry_pos, sizeof(LogEntry));
+  uint32_t entry_pos = update_tail();
+  Database::set(entry, LOG_FILE_NAME, entry_pos, sizeof(Entry));
 }
 
-bool Log::fetch(LogEntry* entry, uint32_t idx)
+bool Log::fetch(Entry* entry, uint32_t idx)
 {
   if (!exists(idx)) return false;
 
-  uint32_t entry_pos = (idx - 1) * sizeof(LogEntry);
-  Database::get(entry, LOG_FILE_NAME, entry_pos, sizeof(LogEntry));
+  uint32_t entry_pos = (idx - 1) * sizeof(Entry);
+  Database::get(entry, LOG_FILE_NAME, entry_pos, sizeof(Entry));
 
   return true;
 }
 
-void Log::prepare
-(LogEntry* entry, uint32_t idx, uint32_t term, const char* value)
+void Log::prepare(Entry* entry, uint32_t idx, uint32_t term, const char* value)
 {
   entry->idx = idx;
   entry->term = term;
@@ -31,36 +32,36 @@ void Log::prepare
   }
 }
 
-bool Log::exists(uint32_t idx) const
+bool Log::exists(uint32_t idx)
 {
-  return idx <= (_tail / sizeof(LogEntry));
+  return idx <= (tail / sizeof(Entry));
 }
 
 void Log::truncate(uint32_t idx)
 {
   if (!exists(idx)) return;
 
-  _tail = (idx - 1) * sizeof(LogEntry);
+  tail = (idx - 1) * sizeof(Entry);
 }
 
-bool Log::is_empty() const
+bool Log::is_empty()
 {
-  return _tail == 0;
+  return tail == 0;
 }
 
 void Log::setup()
 {
   if (!is_empty()) return;
 
-  LogEntry sentinel_entry;
+  Entry sentinel_entry;
   prepare(&sentinel_entry, 1, 1, "");
   append(&sentinel_entry);
 }
 
-uint32_t Log::_update_tail()
+uint32_t Log::update_tail()
 {
-  uint32_t previous = _tail;
-  _tail += sizeof(LogEntry);
+  uint32_t previous = tail;
+  tail += sizeof(Entry);
 
   return previous;
 }

@@ -9,13 +9,13 @@ namespace locke {
 
 class AppendEntry {
  public:
-  AppendEntry(StaticJsonBuffer<MAX_JSON_SIZE>&, const char*);
+  AppendEntry(StaticJsonBuffer<JSON_LARGE>&, char[REQUEST_BUFFER]);
 
   AppendEntry(
-      StaticJsonBuffer<MAX_JSON_SIZE>&,
+      StaticJsonBuffer<JSON_LARGE>&,
       const RaftServer&,
-      const LogEntry&,
-      const LogEntry&);
+      const Log::Entry&,
+      const Log::Entry&);
 
   uint32_t term() const;
   char leader() const;

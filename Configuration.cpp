@@ -6,24 +6,20 @@
 
 using namespace locke;
 
-Configuration::Configuration(RaftServer& server, Log& log) :
-    _server(server),
-    _log(log) {}
-
-void Configuration::save()
+void Configuration::save(RaftServer& server)
 {
-  _ConfigurationRecord cfg{_server.current_term, _server.voted_for, _log._tail};
+  Record cfg{server.current_term, server.voted_for, Log::tail};
   Database::set(&cfg, CFG_FILE_NAME, 0, sizeof(cfg));
 }
 
-void Configuration::restore()
+void Configuration::restore(RaftServer& server)
 {
-  _ConfigurationRecord cfg;
+  Record cfg;
   int result = Database::get(&cfg, CFG_FILE_NAME, 0, sizeof(cfg));
 
   if (result < 1) return;
 
-  _server.current_term = cfg.current_term;
-  _server.voted_for = cfg.voted_for;
-  _log._tail = cfg.log_tail;
+  server.current_term = cfg.current_term;
+  server.voted_for = cfg.voted_for;
+  Log::tail = cfg.log_tail;
 }

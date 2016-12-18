@@ -8,12 +8,7 @@ namespace locke {
 
 class AppendEntryHandler {
  public:
-  AppendEntryHandler(
-      RaftServer&,
-      Log&,
-      StaticJsonBuffer<MAX_JSON_SIZE>& buff,
-      const AppendEntry&);
-
+  AppendEntryHandler(RaftServer&, const AppendEntry&);
   void process();
  private:
   void update_server();
@@ -21,8 +16,6 @@ class AppendEntryHandler {
   void append();
   void reply(bool);
   RaftServer& server;
-  Log& log;
-  StaticJsonBuffer<MAX_JSON_SIZE>& buff;
   const AppendEntry& req;
 };
 

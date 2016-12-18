@@ -4,14 +4,7 @@
 using namespace locke;
 
 AppendEntryHandler::AppendEntryHandler
-(RaftServer& server,
- Log& log,
- StaticJsonBuffer<MAX_JSON_SIZE>& buff,
- const AppendEntry& req) :
-    server(server),
-    log(log),
-    buff(buff),
-    req(req) {}
+(RaftServer& server, const AppendEntry& req) : server(server), req(req) {}
 
 void AppendEntryHandler::process()
 {
@@ -39,8 +32,8 @@ void AppendEntryHandler::update_server()
 
 void AppendEntryHandler::try_append()
 {
-  LogEntry prev;
-  bool prev_found = log.fetch(&prev, req.prev_index());
+  Log::Entry prev;
+  bool prev_found = Log::fetch(&prev, req.prev_index());
 
   if (!prev_found) {
     reply(false);
@@ -48,7 +41,7 @@ void AppendEntryHandler::try_append()
   }
 
   if (prev.term != req.prev_term() || prev.idx != req.prev_index()) {
-    log.truncate(prev.idx);
+    Log::truncate(prev.idx);
     reply(false);
     return;
   }
@@ -59,11 +52,11 @@ void AppendEntryHandler::try_append()
 void AppendEntryHandler::append()
 {
   uint32_t idx = req.prev_index() + 1;
-  LogEntry new_entry;
 
-  log.truncate(idx);
-  log.prepare(&new_entry, idx, req.term(), req.entry());
-  log.append(&new_entry);
+  Log::Entry new_entry;
+  Log::truncate(idx);
+  Log::prepare(&new_entry, idx, req.term(), req.entry());
+  Log::append(&new_entry);
   server.save();
 
   reply(true);
@@ -71,6 +64,7 @@ void AppendEntryHandler::append()
 
 void AppendEntryHandler::reply(bool success)
 {
+  StaticJsonBuffer<JSON_SMALL> buff;
   AppendEntryResponse response(buff, success, server.current_term);
   response.print();
 }

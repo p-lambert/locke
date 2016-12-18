@@ -10,12 +10,9 @@ enum State {
   Leader
 };
 
-class Log;
-class Configuration;
-
 class RaftServer {
  public:
-  RaftServer(Log*, char);
+  RaftServer(char);
   void set_status(State);
   void setup();
   void save();
@@ -24,11 +21,8 @@ class RaftServer {
   char voted_for;
   char leader;
   const char name;
-  Log* _log;
  private:
   State _status;
-
-  friend Configuration;
 };
 
 }
