@@ -8,6 +8,7 @@
 #define CFG_FILE_NAME "svr"
 #define INITIAL_TERM 1
 #define NOBODY_YET '-'
+#define ELECTION_TIMEOUT 10000
 
 // RPC keys
 #define RPC_DELIMITER '}'

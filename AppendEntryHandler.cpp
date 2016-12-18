@@ -25,6 +25,8 @@ void AppendEntryHandler::process()
 
 void AppendEntryHandler::update_server()
 {
+  server.set_status(Follower);
+  server.update_election_timeout();
   server.current_term = req.term();
   server.leader = req.leader();
   server.save();

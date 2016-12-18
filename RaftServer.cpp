@@ -15,9 +15,15 @@ void RaftServer::set_status(State status)
   _status = status;
 }
 
+State RaftServer::get_status()
+{
+  return _status;
+}
+
 void RaftServer::setup()
 {
   restore();
+  update_election_timeout();
   set_status(Follower);
   Log::setup();
 }
@@ -30,4 +36,14 @@ void RaftServer::save()
 void RaftServer::restore()
 {
   Configuration::restore(*this);
+}
+
+void RaftServer::update_election_timeout()
+{
+  _election_timeout = millis() + ELECTION_TIMEOUT;
+}
+
+bool RaftServer::should_become_candidate()
+{
+  return millis() > _election_timeout;
 }
