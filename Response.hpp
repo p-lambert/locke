@@ -2,15 +2,17 @@
 
 #include "Arduino.h"
 #include "ArduinoJson.h"
+#include "RPC.hpp"
 
 namespace locke {
 
-class AppendEntryResponse {
+class Response {
  public:
-  AppendEntryResponse(StaticJsonBuffer<JSON_SMALL>&, const char*);
-  AppendEntryResponse(StaticJsonBuffer<JSON_SMALL>&, bool, uint32_t);
+  Response(StaticJsonBuffer<JSON_SMALL>&, const char*);
+  Response(StaticJsonBuffer<JSON_SMALL>&, bool, uint32_t, RPC::Type);
   bool success() const;
   uint32_t term() const;
+  RPC::Type type() const;
   void print();
  private:
   JsonObject& _json;

@@ -1,5 +1,6 @@
 #include "Constants.hpp"
 #include "RequestVote.hpp"
+#include "RPC.hpp"
 
 using namespace locke;
 
@@ -12,7 +13,7 @@ RequestVote::RequestVote
  const RaftServer& server,
  const Log::Entry& last_entry) : _json(json.createObject())
 {
-  _json[RPC_TYPE] = RPC::RequestVote;
+  _json[RPC_TYPE] = (uint8_t)RPC::RequestVote;
   _json[RPC_TERM] = server.current_term;
   _json[RPC_LEADER] = (uint8_t)server.name;
   _json[RPC_LAST_IDX] = last_entry.idx;

@@ -1,5 +1,6 @@
 #include "Constants.hpp"
 #include "AppendEntry.hpp"
+#include "RPC.hpp"
 
 using namespace locke;
 
@@ -14,7 +15,7 @@ AppendEntry::AppendEntry
  const Log::Entry& previous_entry) : _json(json.createObject())
 {
 
-  _json[RPC_TYPE] = RPC::AppendEntry;
+  _json[RPC_TYPE] = (uint8_t)RPC::AppendEntry;
   _json[RPC_TERM] = server.current_term;
   _json[RPC_LEADER] = (uint8_t)server.name;
   _json[RPC_PREV_IDX] = previous_entry.idx;

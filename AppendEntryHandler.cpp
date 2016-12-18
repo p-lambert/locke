@@ -1,5 +1,5 @@
 #include "AppendEntryHandler.hpp"
-#include "AppendEntryResponse.hpp"
+#include "Response.hpp"
 
 using namespace locke;
 
@@ -65,6 +65,6 @@ void AppendEntryHandler::append()
 void AppendEntryHandler::reply(bool success)
 {
   StaticJsonBuffer<JSON_SMALL> buff;
-  AppendEntryResponse response(buff, success, server.current_term);
+  Response response(buff, success, server.current_term, RPC::AppendEntryResponse);
   response.print();
 }
