@@ -58,6 +58,12 @@ void Log::setup()
   append(&sentinel_entry);
 }
 
+void Log::last(Entry* entry)
+{
+  uint32_t last_idx = tail / sizeof(Entry);
+  fetch(entry, last_idx);
+}
+
 uint32_t Log::update_tail()
 {
   uint32_t previous = tail;

@@ -21,6 +21,7 @@ class Log {
   static bool exists(uint32_t);
   static void truncate(uint32_t);
   static void setup();
+  static void last(Entry*);
   static uint32_t tail;
 
  private:
