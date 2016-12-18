@@ -4,9 +4,7 @@
 
 using namespace locke;
 
-AppendEntry::AppendEntry
-(StaticJsonBuffer<JSON_LARGE>& json, char msg[REQUEST_BUFFER]) :
-    _json(json.parseObject(msg)) {}
+AppendEntry::AppendEntry(JsonObject& json) : _json(json) {}
 
 AppendEntry::AppendEntry
 (StaticJsonBuffer<JSON_LARGE>& json,

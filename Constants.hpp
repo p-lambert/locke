@@ -10,6 +10,7 @@
 #define NOBODY_YET '-'
 
 // RPC keys
+#define RPC_DELIMITER '}'
 #define RPC_TYPE "r"
 #define RPC_TERM "t"
 #define RPC_LEADER "l"

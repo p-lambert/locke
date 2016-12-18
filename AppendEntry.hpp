@@ -9,7 +9,7 @@ namespace locke {
 
 class AppendEntry {
  public:
-  AppendEntry(StaticJsonBuffer<JSON_LARGE>&, char[REQUEST_BUFFER]);
+  AppendEntry(JsonObject&);
 
   AppendEntry(
       StaticJsonBuffer<JSON_LARGE>&,

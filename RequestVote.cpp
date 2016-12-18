@@ -4,9 +4,7 @@
 
 using namespace locke;
 
-RequestVote::RequestVote
-(StaticJsonBuffer<JSON_LARGE>& json, char msg[REQUEST_BUFFER]) :
-    _json(json.parseObject(msg)) {}
+RequestVote::RequestVote(JsonObject& json) : _json(json) {}
 
 RequestVote::RequestVote
 (StaticJsonBuffer<JSON_LARGE>& json,

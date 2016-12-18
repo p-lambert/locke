@@ -9,7 +9,7 @@ namespace locke {
 
 class RequestVote {
  public:
-  RequestVote(StaticJsonBuffer<JSON_LARGE>&, char[REQUEST_BUFFER]);
+  RequestVote(JsonObject&);
 
   RequestVote(
       StaticJsonBuffer<JSON_LARGE>&,

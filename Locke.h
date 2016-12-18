@@ -9,5 +9,6 @@
 #include "RequestVote.hpp"
 #include "RequestVoteHandler.hpp"
 #include "Database.hpp"
+#include "Router.hpp"
 
 using namespace locke;
