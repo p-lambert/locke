@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Arduino.h"
+#include "Constants.hpp"
+#include "Peer.hpp"
 
 namespace locke {
 
@@ -23,7 +25,7 @@ class RaftServer {
   uint32_t current_term;
   char voted_for;
   char leader;
-  Peer peers[NUM_PEERS];
+  Peer* peers[NUM_PEERS];
   const char name;
  private:
   State _status;

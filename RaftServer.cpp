@@ -1,4 +1,3 @@
-#include "Constants.hpp"
 #include "RaftServer.hpp"
 #include "Configuration.hpp"
 #include "Log.hpp"

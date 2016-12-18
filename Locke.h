@@ -10,5 +10,6 @@
 #include "RequestVoteHandler.hpp"
 #include "Database.hpp"
 #include "Router.hpp"
+#include "Peer.hpp"
 
 using namespace locke;

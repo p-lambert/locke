@@ -1,5 +1,8 @@
 #pragma once
 
+#define CLUSTER_SIZE 3
+#define NUM_PEERS 2
+#define MAJORITY 2
 #define MAX_LOG_VALUE_SIZE 20
 #define JSON_LARGE 70
 #define JSON_SMALL 25
