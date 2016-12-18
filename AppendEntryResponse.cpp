@@ -11,18 +11,18 @@ AppendEntryResponse::AppendEntryResponse
 (StaticJsonBuffer<JSON_SMALL>& json, bool success, uint32_t term) :
     _json(json.createObject())
 {
-  _json[AE_SUCCESS] = success;
-  _json[AE_TERM] =  term;
+  _json[RPC_SUCCESS] = success;
+  _json[RPC_TERM] =  term;
 }
 
 uint32_t AppendEntryResponse::term() const
 {
-  return _json[AE_TERM];
+  return _json[RPC_TERM];
 }
 
 bool AppendEntryResponse::success() const
 {
-  return _json[AE_SUCCESS];
+  return _json[RPC_SUCCESS];
 }
 
 void AppendEntryResponse::print()

@@ -12,30 +12,31 @@ RequestVote::RequestVote
  const RaftServer& server,
  const Log::Entry& last_entry) : _json(json.createObject())
 {
-  _json[AE_TERM] = server.current_term;
-  _json[AE_LEADER] = (uint8_t)server.name;
-  _json[AE_LAST_IDX] = last_entry.idx;
-  _json[AE_LAST_TERM] = last_entry.term;
+  _json[RPC_TYPE] = RPC::RequestVote;
+  _json[RPC_TERM] = server.current_term;
+  _json[RPC_LEADER] = (uint8_t)server.name;
+  _json[RPC_LAST_IDX] = last_entry.idx;
+  _json[RPC_LAST_TERM] = last_entry.term;
 }
 
 uint32_t RequestVote::term() const
 {
-  return _json[AE_TERM];
+  return _json[RPC_TERM];
 }
 
 char RequestVote::candidate() const
 {
-  return (uint8_t)_json[AE_CANDIDATE];
+  return (uint8_t)_json[RPC_CANDIDATE];
 }
 
 uint32_t RequestVote::last_index() const
 {
-  return _json[AE_LAST_IDX];
+  return _json[RPC_LAST_IDX];
 }
 
 uint32_t RequestVote::last_term() const
 {
-  return _json[AE_LAST_TERM];
+  return _json[RPC_LAST_TERM];
 }
 
 void RequestVote::print()

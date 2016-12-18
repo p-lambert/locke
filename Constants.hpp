@@ -9,13 +9,14 @@
 #define INITIAL_TERM 1
 #define NOBODY_YET '-'
 
-// AppendEntry payload keys
-#define AE_TERM "t"
-#define AE_LEADER "l"
-#define AE_CANDIDATE "c"
-#define AE_PREV_IDX "pi"
-#define AE_PREV_TERM "pt"
-#define AE_LAST_IDX "li"
-#define AE_LAST_TERM "lt"
-#define AE_VALUE "v"
-#define AE_SUCCESS "v"
+// RPC keys
+#define RPC_TYPE "r"
+#define RPC_TERM "t"
+#define RPC_LEADER "l"
+#define RPC_CANDIDATE "c"
+#define RPC_PREV_IDX "pi"
+#define RPC_PREV_TERM "pt"
+#define RPC_LAST_IDX "li"
+#define RPC_LAST_TERM "lt"
+#define RPC_VALUE "v"
+#define RPC_SUCCESS "v"
