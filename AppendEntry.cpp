@@ -6,11 +6,17 @@ using namespace locke;
 
 AppendEntry::AppendEntry(JsonObject& json) : _json(json) {}
 
+AppendEntry::AppendEntry(JsonObject& json, const RaftServer& svr) : _json(json)
+{
+  _json[RPC_TYPE] = (uint8_t)RPC::AppendEntry;
+  _json[RPC_TERM] = svr.current_term;
+}
+
 AppendEntry::AppendEntry
-(StaticJsonBuffer<JSON_LARGE>& json,
+(JsonObject& json,
  const RaftServer& server,
  const Log::Entry& entry,
- const Log::Entry& previous_entry) : _json(json.createObject())
+ const Log::Entry& previous_entry) : _json(json)
 {
 
   _json[RPC_TYPE] = (uint8_t)RPC::AppendEntry;
