@@ -14,6 +14,7 @@
 #define INITIAL_TERM 1
 #define NOBODY_YET '-'
 #define ELECTION_TIMEOUT 10000
+#define RETRY_AFTER 5000
 
 // RPC keys
 #define RPC_DELIMITER '}'
