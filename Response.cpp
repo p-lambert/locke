@@ -5,7 +5,7 @@
 using namespace locke;
 
 Response::Response
-(StaticJsonBuffer<JSON_SMALL>& json, const char* msg)
+(StaticJsonBuffer<JSON_SMALL>& json, char msg[RESPONSE_BUFFER])
     : _json(json.parseObject(msg)) {}
 
 Response::Response

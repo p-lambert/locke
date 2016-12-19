@@ -8,7 +8,7 @@ namespace locke {
 
 class Response {
  public:
-  Response(StaticJsonBuffer<JSON_SMALL>&, const char*);
+  Response(StaticJsonBuffer<JSON_SMALL>&, char[RESPONSE_BUFFER]);
   Response(StaticJsonBuffer<JSON_SMALL>&, bool, uint32_t, RPC::Type);
   bool success() const;
   uint32_t term() const;

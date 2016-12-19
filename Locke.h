@@ -11,5 +11,6 @@
 #include "Database.hpp"
 #include "Router.hpp"
 #include "Peer.hpp"
+#include "SyncRequest.hpp"
 
 using namespace locke;
