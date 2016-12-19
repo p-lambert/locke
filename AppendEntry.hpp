@@ -25,8 +25,7 @@ class AppendEntry {
   const char* entry() const;
   bool isHeartbeat() const;
   void print();
- private:
-  JsonObject& _json;
+  JsonObject& json;
 };
 
 }
