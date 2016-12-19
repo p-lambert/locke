@@ -23,6 +23,8 @@ class RaftServer {
   void save();
   void restore();
   uint32_t current_term;
+  uint32_t last_index;
+  uint32_t commit_index;
   char voted_for;
   char leader;
   Peer* peers[NUM_PEERS];

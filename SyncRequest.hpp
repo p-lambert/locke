@@ -1,3 +1,5 @@
+#pragma once
+
 #include "Constants.hpp"
 #include "Arduino.h"
 #include "Ethernet.h"

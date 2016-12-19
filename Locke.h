@@ -8,9 +8,9 @@
 #include "AppendEntryHandler.hpp"
 #include "RequestVote.hpp"
 #include "RequestVoteHandler.hpp"
+#include "LogReplication.hpp"
 #include "Database.hpp"
 #include "Router.hpp"
 #include "Peer.hpp"
-#include "SyncRequest.hpp"
 
 using namespace locke;

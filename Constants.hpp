@@ -13,7 +13,7 @@
 #define CFG_FILE_NAME "svr"
 #define INITIAL_TERM 1
 #define NOBODY_YET '-'
-#define ELECTION_TIMEOUT 10000
+#define ELECTION_TIMEOUT 40000
 #define RETRY_AFTER 5000
 
 // RPC keys

@@ -59,6 +59,8 @@ void AppendEntryHandler::append()
   Log::truncate(idx);
   Log::prepare(&new_entry, idx, req.term(), req.entry());
   Log::append(&new_entry);
+
+  server.last_index = idx;
   server.save();
 
   reply(true);
