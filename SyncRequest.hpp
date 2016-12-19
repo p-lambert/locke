@@ -1,6 +1,7 @@
 #include "Constants.hpp"
 #include "Arduino.h"
 #include "Ethernet.h"
+#include "ArduinoJson.h"
 
 namespace locke {
 
@@ -11,7 +12,7 @@ typedef struct {
   uint32_t term;
 } Result;
 
-bool perform(IPAddress&, char*, Result*);
+bool perform(IPAddress&, JsonObject&, Result*);
 
 }
 

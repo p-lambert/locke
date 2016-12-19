@@ -1,10 +1,9 @@
 #include "SyncRequest.hpp"
-#include "ArduinoJson.h"
 #include "Response.hpp"
 
 using namespace locke;
 
-bool SyncRequest::perform(IPAddress& ip, char* msg, Result* res)
+bool SyncRequest::perform(IPAddress& ip, JsonObject& json, Result* res)
 {
   EthernetClient client;
   StaticJsonBuffer<JSON_SMALL> json_buff;
@@ -15,7 +14,7 @@ bool SyncRequest::perform(IPAddress& ip, char* msg, Result* res)
     return false;
   }
 
-  client.println(msg);
+  json.printTo(client);
 
   while (client.connected() && pos < RESPONSE_BUFFER) {
     if (!client.available()) continue;
@@ -32,8 +31,8 @@ bool SyncRequest::perform(IPAddress& ip, char* msg, Result* res)
   client.stop();
 
   Response response(json_buff, buff);
-  *res->success = response.success();
-  *res->term = response.term();
+  res->success = response.success();
+  res->term = response.term();
 
   return true;
 }
