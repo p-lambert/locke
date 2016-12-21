@@ -3,7 +3,7 @@
 
 using namespace locke;
 
-int Database::get(void *record, char* file_name, uint32_t pos, int size)
+int Database::get(void *record, char* file_name, uint32_t pos, size_t size)
 {
   File f = SD.open(file_name, O_READ);
   f.seek(pos);
@@ -13,7 +13,7 @@ int Database::get(void *record, char* file_name, uint32_t pos, int size)
   return result;
 }
 
-int Database::set(void *record, char* file_name, uint32_t pos, int size)
+int Database::set(void *record, char* file_name, uint32_t pos, size_t size)
 {
   File f = SD.open(file_name, O_WRITE | O_CREAT);
   f.seek(pos);
